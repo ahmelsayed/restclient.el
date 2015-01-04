@@ -346,9 +346,9 @@
 
 (setq restclient-mode-keywords
       (list (list restclient-method-url-regexp '(1 font-lock-keyword-face) '(2 font-lock-function-name-face))
-            (list restclient-header-regexp '(1 font-lock-variable-name-face) '(2 font-lock-string-face))
+            (list restclient-header-regexp '(1 font-lock-constant-face) '(2 font-lock-string-face))
             (list restclient-evar-regexp '(1 font-lock-preprocessor-face) '(2 font-lock-function-name-face))
-            (list restclient-var-regexp '(1 font-lock-preprocessor-face) '(3 font-lock-string-face))
+            (list restclient-var-regexp '(1 font-lock-builtin-face) '(3 font-lock-string-face))
             ))
 
 (defvar restclient-mode-syntax-table
