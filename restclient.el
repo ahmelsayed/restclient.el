@@ -104,13 +104,13 @@
         (when (looking-at restclient-content-type-regexp)
           (setq guessed-mode
                 (cdr (assoc-string (concat
-				    (buffer-substring-no-properties (match-beginning 1) (match-end 1))
-				    "/"
-				    (buffer-substring-no-properties (match-beginning 2) (match-end 2))
-				    )
+                                    (buffer-substring-no-properties (match-beginning 1) (match-end 1))
+                                    "/"
+                                    (buffer-substring-no-properties (match-beginning 2) (match-end 2))
+                                    )
                       '(("text/xml" . xml-mode)
                         ("application/xml" . xml-mode)
-                        ("application/json" . js-mode)
+                        ("application/json" . json-mode)
                         ("image/png" . image-mode)
                         ("image/jpeg" . image-mode)
                         ("image/gif" . image-mode)
@@ -140,6 +140,12 @@
               ))
 
            ((eq guessed-mode 'js-mode)
+            (let ((json-special-chars (remq (assoc ?/ json-special-chars) json-special-chars)))
+              (json-pretty-print-buffer))
+            (restclient-prettify-json-unicode)
+            )
+
+           ((eq guessed-mode 'json-mode)
             (let ((json-special-chars (remq (assoc ?/ json-special-chars) json-special-chars)))
               (json-pretty-print-buffer))
             (restclient-prettify-json-unicode)
